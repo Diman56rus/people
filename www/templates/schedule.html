@@ -1,0 +1,12 @@
+<ion-view view-title="Расписание пар">
+    <ion-content>
+        <center><h1 ng-if="weekNumber() % 2 == 0">Четная неделя</h1>
+            <h1 ng-if="weekNumber() % 2 != 0">Нечетная неделя</h1>
+        </center>
+            <ion-list>
+                <ion-item ng-repeat="day in dayOfWeek" href="#/app/day/{{day.id}}">
+                    {{day.title}}
+                </ion-item>
+            </ion-list>
+    </ion-content>
+</ion-view>

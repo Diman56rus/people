@@ -1,0 +1,47 @@
+<ion-view view-title="Расписание на сегодня">
+    <ion-content>
+
+        <center><h1 ng-if="weekNumber() % 2 == 0">Четная неделя</h1>
+            <h1 ng-if="weekNumber() % 2 != 0">Нечетная неделя</h1>
+        </center>
+
+
+        <div class="card" ng-show="has_update == 1">
+          <div class="item item-divider">
+            Доступно обновление
+          </div>
+          <div class="item item-text-wrap" style="text-align: center;">
+            Доступна новая версия приложения. Скачать можно <a href="#" style="text-decoration: none; color: red;" ng-click="go()">тут</a>
+            <br />
+          </div>
+        </div>
+
+        <div ng-repeat="arr in msg">
+            <div class="card">
+                <div class="item item-divider positive-bg">
+                    {{arr.num}} пара - {{arr.subject.name}}
+                </div>
+                <div class="item item-text-wrap">
+                    <b>Кабинет: </b> {{arr.office}}<br />
+                    <b>Преподаватель: </b> {{arr.teacher}}<br />
+                    <b>Подгруппа: </b> 
+                    <span ng-if="arr.stud_subgroup == 3">Всем</span>
+                    <span ng-if="arr.stud_subgroup < 3">{{arr.stud_subgroup}}</span>
+                    <br />
+                    <b>Время проведения: </b> {{arr.start}} - {{arr.end}}<br />
+
+                    <br />
+
+                    <div ng-if="date < arr.end && date > arr.start">
+                        <progress max="100" value="{{diff(arr.start, arr.end)}}"></progress>
+                    </div>
+
+                    <div ng-if="date > arr.end">
+                        <center><h2>Пара закончилась :)</h2></center>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>
