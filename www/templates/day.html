@@ -1,0 +1,26 @@
+<ion-view view-title="Расписание на {{dayOfWeek[getSc() - 1].title}}">
+    <ion-content>
+        <center><h1 ng-if="weekNumber() % 2 == 0">Четная неделя</h1>
+            <h1 ng-if="weekNumber() % 2 != 0">Нечетная неделя</h1>
+        </center>
+
+        <div ng-repeat="arr in msg">
+            <div class="card">
+                <div class="item item-divider positive-bg">
+                    {{arr.num}} пара - {{arr.subject.name}}
+                </div>
+                <div class="item item-text-wrap">
+                    <b>Кабинет: </b> {{arr.office}}<br />
+                    <b>Преподаватель: </b> {{arr.teacher}}<br />
+                    <b>Подгруппа: </b> 
+                    <span ng-if="arr.stud_subgroup == 3">Всем</span>
+                    <span ng-if="arr.stud_subgroup < 3">{{arr.stud_subgroup}}</span>
+                    <br />
+                    <b>Время проведения: </b> {{arr.start}} - {{arr.end}}<br />
+                    <br />
+                </div>
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>
