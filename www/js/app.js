@@ -41,9 +41,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.models', 'ng
                         templateUrl: 'templates/menu.html',
                         controller: 'AppCtrl',
                         resolve: {
+<<<<<<< HEAD
                             data: function($http, $rootScope, $cordovaNetwork, $ionicPopup, Schedule, Group){
                                 window.localStorage["offline"] = $cordovaNetwork.isOffline();
                                 // window.localStorage["offline"] = "false";
+=======
+                            data: function($http, $rootScope, $cordovaNetwork, $ionicPopup, Schedule, Group, Teacher){
+                                //window.localStorage["offline"] = $cordovaNetwork.isOffline();
+                                 window.localStorage["offline"] = "false";
+>>>>>>> e999278d081bda2dc829a33cfd36a129c134fc3f
 
                                 if(!window.localStorage["group"]){
                                     $rootScope.data = {};
@@ -81,6 +87,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.models', 'ng
                                         window.localStorage["schedule"] = JSON.stringify(data);
                                     });
                                 }
+<<<<<<< HEAD
+=======
+
+								Teacher.getTeachers().success(function(data){
+									window.localStorage["teachers"] = JSON.stringify(data);							
+								});
+>>>>>>> e999278d081bda2dc829a33cfd36a129c134fc3f
                             }
                         }
                     })
@@ -128,11 +141,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.models', 'ng
                         resolve: {
                             teachers: function($http, Config){
                                 if(window.localStorage["offline"] == "false"){
+<<<<<<< HEAD
                                     var request = "?cmd=getteacher";
 
                                     return $http.get(Config.API_URL + request).success(function (data) {
                                         return data;
                                     });
+=======
+                                    
+>>>>>>> e999278d081bda2dc829a33cfd36a129c134fc3f
                                 }
                             }
                         }
@@ -159,4 +176,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.models', 'ng
                     });
             // if none of the above states are matched, use this as the fallback
             $urlRouterProvider.otherwise('/app/main');
+<<<<<<< HEAD
         })
+=======
+        })
+>>>>>>> e999278d081bda2dc829a33cfd36a129c134fc3f

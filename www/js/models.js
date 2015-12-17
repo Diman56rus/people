@@ -76,9 +76,15 @@ angular.module("starter.models", [])
             var diffMins = ((d2 - d1) / 100); // длительность пары
             var cur_date = new Date();
 
+<<<<<<< HEAD
             var current = cur_date.getHours() + ":" + cur_date.getMinutes() + ":" + cur_date.getSeconds();
 
 			return (100 - (d2 - this.getSecond(current)) / diffMins).toFixed(2);
+=======
+            var current = cur_date.getHours() + ":" + cur_date.getMinutes() + ":00";
+
+            return 100 - (d2 - this.getSecond(current)) / diffMins + "%";
+>>>>>>> e999278d081bda2dc829a33cfd36a129c134fc3f
         };
 	})
 
@@ -91,4 +97,19 @@ angular.module("starter.models", [])
                 return info;
             });
 		}
+<<<<<<< HEAD
 	})
+=======
+	})
+
+
+	.service("Teacher", function($http, Config){
+		this.getTeachers = function(){
+			var request = "?cmd=getteacher";
+
+		    return $http.get(Config.API_URL + request).success(function (data) {
+		        return data;
+		    });
+		}
+	})
+>>>>>>> e999278d081bda2dc829a33cfd36a129c134fc3f

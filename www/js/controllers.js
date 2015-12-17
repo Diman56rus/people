@@ -13,11 +13,17 @@ angular.module("starter.controllers", [])
                 window.open(Config.SITE_URL + '?r=phone/index', '_system', 'location=yes');
             }
 
+<<<<<<< HEAD
             $interval(function(){
                 $scope.diff = function(date_start, date_end){
                     return Schedule.difference(date_start, date_end);
                 };
             }, 1000);
+=======
+            $scope.diff = function(date_start, date_end){
+                Schedule.difference(date_start, date_end);
+            }
+>>>>>>> e999278d081bda2dc829a33cfd36a129c134fc3f
 
             $scope.getDayNum = function(){
                 var num = $state.params;
@@ -39,9 +45,12 @@ angular.module("starter.controllers", [])
         })
 
         .controller("TeacherCtrl", function ($scope, $http, teachers) {
+<<<<<<< HEAD
             if(window.localStorage["offline"] == "false")
                 window.localStorage["teachers"] = JSON.stringify(teachers.data);
 
+=======
+>>>>>>> e999278d081bda2dc829a33cfd36a129c134fc3f
             $scope.teachers = JSON.parse(window.localStorage["teachers"]);
         })
 
