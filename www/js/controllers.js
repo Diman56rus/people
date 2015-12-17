@@ -38,7 +38,7 @@ angular.module("starter.controllers", [])
             $scope.date = (hour < 10 ? "0" + hour : hour) + ":" + (minute < 10 ? "0" + minute : minute) + ":" + second;
         })
 
-        .controller("TeacherCtrl", function ($scope, $http, teachers) {
+        .controller("TeacherCtrl", function ($scope) {
             $scope.teachers = JSON.parse(window.localStorage["teachers"]);
         })
 

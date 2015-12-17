@@ -79,15 +79,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.models', 'ng
                                     });
                                 }
 
+                                Teacher.getTeachers().success(function(data){
+                                    window.localStorage["teachers"] = JSON.stringify(data);                         
+                                });
+
                                 if(!window.localStorage["schedule"] || window.localStorage["offline"] == "false"){
                                     return Schedule.getAllSchedule().success(function(data){
                                         window.localStorage["schedule"] = JSON.stringify(data);
                                     });
                                 }
-
-								Teacher.getTeachers().success(function(data){
-									window.localStorage["teachers"] = JSON.stringify(data);							
-								});
                             }
                         }
                     })
