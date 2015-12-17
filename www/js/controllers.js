@@ -37,9 +37,6 @@ angular.module("starter.controllers", [])
         })
 
         .controller("TeacherCtrl", function ($scope, $http, teachers) {
-            if(window.localStorage["offline"] == "false")
-                window.localStorage["teachers"] = JSON.stringify(teachers.data);
-
             $scope.teachers = JSON.parse(window.localStorage["teachers"]);
         })
 

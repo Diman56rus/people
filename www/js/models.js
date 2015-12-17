@@ -92,3 +92,14 @@ angular.module("starter.models", [])
             });
 		}
 	})
+
+
+	.service("Teacher", function($http, Config){
+		this.getTeachers = function(){
+			var request = "?cmd=getteacher";
+
+		    return $http.get(Config.API_URL + request).success(function (data) {
+		        return data;
+		    });
+		}
+	})

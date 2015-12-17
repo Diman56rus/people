@@ -41,9 +41,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.models', 'ng
                         templateUrl: 'templates/menu.html',
                         controller: 'AppCtrl',
                         resolve: {
-                            data: function($http, $rootScope, $cordovaNetwork, $ionicPopup, Schedule, Group){
-                                window.localStorage["offline"] = $cordovaNetwork.isOffline();
-                                // window.localStorage["offline"] = "false";
+                            data: function($http, $rootScope, $cordovaNetwork, $ionicPopup, Schedule, Group, Teacher){
+                                //window.localStorage["offline"] = $cordovaNetwork.isOffline();
+                                 window.localStorage["offline"] = "false";
 
                                 if(!window.localStorage["group"]){
                                     $rootScope.data = {};
@@ -81,6 +81,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.models', 'ng
                                         window.localStorage["schedule"] = JSON.stringify(data);
                                     });
                                 }
+
+								Teacher.getTeachers().success(function(data){
+									window.localStorage["teachers"] = JSON.stringify(data);							
+								});
                             }
                         }
                     })
@@ -128,11 +132,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.models', 'ng
                         resolve: {
                             teachers: function($http, Config){
                                 if(window.localStorage["offline"] == "false"){
-                                    var request = "?cmd=getteacher";
-
-                                    return $http.get(Config.API_URL + request).success(function (data) {
-                                        return data;
-                                    });
+                                    
                                 }
                             }
                         }
