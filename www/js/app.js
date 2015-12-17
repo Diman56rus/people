@@ -22,7 +22,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.models', 'ng
         .constant('Config', {
             'SITE_URL': 'http://sevgurasp.ru',
             'API_URL': 'http://sevgurasp.ru/api/schedule.php',
-            'VERSION': 0.31,
+            'VERSION': 0.32,
             'DAY_OF_WEEK': [
                 {id: 1, title: "Понедельник"},
                 {id: 2, title: "Вторник"},
