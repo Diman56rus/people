@@ -1,6 +1,11 @@
 angular.module("starter.controllers", [])
+<<<<<<< HEAD
         .controller("AppCtrl", function ($scope, $ionicPopup, data) {
             if (window.localStorage["offline"] == "true" && !window.localStorage["schedule"]){
+=======
+        .controller("AppCtrl", function ($scope, $timeout, $ionicPopup) {
+            if(window.localStorage["offline"] == "true" && window.localStorage["schedule"] == "undefined"){
+>>>>>>> 3c286985457a82dded54e3f82d01e2cfa0c4cd1c
                 $ionicPopup.alert({
                     title: "Добро пожаловать!",
                     template: "Для нормального функционирования приложения нужно подключение к интернету, всего лишь 1 раз :-)"
@@ -8,6 +13,7 @@ angular.module("starter.controllers", [])
             }
         })
 
+<<<<<<< HEAD
         .controller("ScheduleCtrl", function ($http, $scope, $state) {
             $scope.go = function(){
                 window.open('http://vilis8uy.bget.ru/index.php?r=phone/index', '_system', 'location=yes');
@@ -37,6 +43,9 @@ angular.module("starter.controllers", [])
                 $scope.has_update = 0;
             };
 
+=======
+        .controller("ScheduleCtrl", function ($scope, $state) {
+>>>>>>> 3c286985457a82dded54e3f82d01e2cfa0c4cd1c
             var time = function (time) {
                 return time / 1000 / 60 / 60 / 24;
             };
@@ -73,7 +82,11 @@ angular.module("starter.controllers", [])
                 var res = [];
 
                 for(var i = 0; i < data.length; i++){
+<<<<<<< HEAD
                     if(data[i].day == num && data[i].week == week && (data[i].stud_subgroup == window.localStorage["subgroup"] || data[i].stud_subgroup == 3)){
+=======
+                    if(data[i].day == num && data[i].week == week){
+>>>>>>> 3c286985457a82dded54e3f82d01e2cfa0c4cd1c
                         res.push(data[i]);
                     }
                 }
@@ -82,7 +95,12 @@ angular.module("starter.controllers", [])
             };
 
             var getSchedule = function(num) {
+<<<<<<< HEAD
                 var tmp = window.localStorage["schedule"];
+=======
+                var tmp =  window.localStorage["schedule"];
+
+>>>>>>> 3c286985457a82dded54e3f82d01e2cfa0c4cd1c
                 return getCurrent(num, tmp);
             };
 
@@ -116,6 +134,7 @@ angular.module("starter.controllers", [])
             $scope.msg = getSchedule($scope.getSc());
         })
 
+<<<<<<< HEAD
         .controller("TeacherCtrl", function ($scope, $http, teachers) {
             if(window.localStorage["offline"] == "false")
                 window.localStorage["teachers"] = JSON.stringify(teachers.data);
@@ -153,6 +172,35 @@ angular.module("starter.controllers", [])
                     Schedule.getSchedule().success(function(data){
                         window.localStorage["schedule"] = JSON.stringify(data);
                     });
+=======
+        .controller("TeacherCtrl", function ($scope, $http) {
+            if(window.localStorage["offline"] == "false"){
+                var tdata = {
+                    "cmd": "getteacher",
+                };
+
+                var getteacher = function(){
+                    return $http.post("http://vilis8uy.bget.ru/schedule.php", tdata).success(function (data) {
+                        return data;
+                    });
+                };
+
+                getteacher().success(function(data){
+                    window.localStorage["teachers"] = JSON.stringify(data);
+                });
+            }
+
+            $scope.teachers = JSON.parse(window.localStorage["teachers"]);
+        })
+
+        .controller("SettingsCtrl", function ($scope, $ionicPopup){
+            $scope.cleardata = function(){
+                window.localStorage["schedule"] = "undefined";
+
+                $ionicPopup.alert({
+                    title: "Удалено!",
+                    template: "Информация успешно удалена"
+>>>>>>> 3c286985457a82dded54e3f82d01e2cfa0c4cd1c
                 });
             };
 

@@ -9,7 +9,11 @@
     </author>
   <content src="index.html"/>
   <access origin="*"/>
+<<<<<<< HEAD
   <allow-navigation href="http://*/*"/>
+=======
+  <allow-navigation href="http://*/*" />
+>>>>>>> 3c286985457a82dded54e3f82d01e2cfa0c4cd1c
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>
@@ -40,4 +44,8 @@
     <splash src="resources/android/splash/drawable-port-xxhdpi-screen.png" density="port-xxhdpi"/>
     <splash src="resources/android/splash/drawable-port-xxxhdpi-screen.png" density="port-xxxhdpi"/>
   </platform>
+<<<<<<< HEAD
 </widget>
+=======
+</widget>
+>>>>>>> 3c286985457a82dded54e3f82d01e2cfa0c4cd1c

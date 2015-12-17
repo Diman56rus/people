@@ -6,7 +6,35 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
 
+<<<<<<< HEAD
         .run(function ($ionicPlatform) {
+=======
+        .run(function ($rootScope, $ionicPlatform, $http, $cordovaNetwork) {
+            window.localStorage["offline"] = $cordovaNetwork.isOffline();
+
+            if(window.localStorage["offline"] == "false"){
+                $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded; charset=UTF-8";
+
+                var tdata = {
+                    "cmd": "all_schedule",
+                    "group": "ИСб-25"
+                };
+
+
+                var getData = function(){
+                    return $http.post("http://vilis8uy.bget.ru/schedule.php", tdata).success(function(data){
+                        return data;
+                    });
+                };
+
+
+                getData().success(function(data){
+                    window.localStorage["schedule"] = JSON.stringify(data);
+                });
+            }
+
+
+>>>>>>> 3c286985457a82dded54e3f82d01e2cfa0c4cd1c
             $ionicPlatform.ready(function () {
                 // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
                 // for form inputs)
@@ -22,6 +50,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
             });
         })
 
+<<<<<<< HEAD
         .service('Schedule', function ($http){
             var apiUrl = 'http://vilis8uy.bget.ru/schedule.php';
 
@@ -39,12 +68,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
             }
         })
 
+=======
+>>>>>>> 3c286985457a82dded54e3f82d01e2cfa0c4cd1c
         .config(function ($stateProvider, $urlRouterProvider) {
             $stateProvider
                     .state('app', {
                         url: '/app',
                         abstract: true,
                         templateUrl: 'templates/menu.html',
+<<<<<<< HEAD
                         controller: 'AppCtrl',
                         resolve: {
                             data: function($rootScope, $cordovaNetwork, $ionicPopup, Schedule){
@@ -78,11 +110,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                                 }
                             }
                         }
+=======
+                        controller: 'AppCtrl'
+>>>>>>> 3c286985457a82dded54e3f82d01e2cfa0c4cd1c
                     })
 
                     .state('app.main', {
                         url: '/main',
+<<<<<<< HEAD
                         cache: false,
+=======
+>>>>>>> 3c286985457a82dded54e3f82d01e2cfa0c4cd1c
                         views: {
                             'menuContent': {
                                 templateUrl: 'templates/main.html',
@@ -96,14 +134,21 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                         views: {
                             'menuContent': {
                                 templateUrl: 'templates/schedule.html',
+<<<<<<< HEAD
                                 controller: 'ScheduleCtrl',
+=======
+                                controller: 'ScheduleCtrl'
+>>>>>>> 3c286985457a82dded54e3f82d01e2cfa0c4cd1c
                             }
                         }
                     })
 
                     .state('app.day', {
                         url: '/day/:id',
+<<<<<<< HEAD
                         cache: false,
+=======
+>>>>>>> 3c286985457a82dded54e3f82d01e2cfa0c4cd1c
                         views: {
                             'menuContent': {
                                 templateUrl: 'templates/day.html',
@@ -119,6 +164,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                                 templateUrl: 'templates/teachers.html',
                                 controller: 'TeacherCtrl'
                             }
+<<<<<<< HEAD
                         },
                         resolve: {
                             teachers: function($http){
@@ -132,6 +178,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                                     });
                                 }
                             }
+=======
+>>>>>>> 3c286985457a82dded54e3f82d01e2cfa0c4cd1c
                         }
                     })
 
@@ -146,4 +194,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                     });
             // if none of the above states are matched, use this as the fallback
             $urlRouterProvider.otherwise('/app/main');
+<<<<<<< HEAD
         })
+=======
+        });
+>>>>>>> 3c286985457a82dded54e3f82d01e2cfa0c4cd1c
