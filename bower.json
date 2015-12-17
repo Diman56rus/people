@@ -4,11 +4,8 @@
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.1.1",
     "ngCordova": "~0.1.23-alpha"
-<<<<<<< HEAD
   },
   "dependencies": {
     "ngCordova": "~0.1.23-alpha"
-=======
->>>>>>> 3c286985457a82dded54e3f82d01e2cfa0c4cd1c
   }
 }

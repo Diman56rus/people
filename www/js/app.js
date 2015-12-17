@@ -4,87 +4,54 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.models', 'ngCordova'])
 
-<<<<<<< HEAD
         .run(function ($ionicPlatform) {
-=======
-        .run(function ($rootScope, $ionicPlatform, $http, $cordovaNetwork) {
-            window.localStorage["offline"] = $cordovaNetwork.isOffline();
-
-            if(window.localStorage["offline"] == "false"){
-                $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded; charset=UTF-8";
-
-                var tdata = {
-                    "cmd": "all_schedule",
-                    "group": "ИСб-25"
-                };
-
-
-                var getData = function(){
-                    return $http.post("http://vilis8uy.bget.ru/schedule.php", tdata).success(function(data){
-                        return data;
-                    });
-                };
-
-
-                getData().success(function(data){
-                    window.localStorage["schedule"] = JSON.stringify(data);
-                });
-            }
-
-
->>>>>>> 3c286985457a82dded54e3f82d01e2cfa0c4cd1c
             $ionicPlatform.ready(function () {
-                // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-                // for form inputs)
                 if (window.cordova && window.cordova.plugins.Keyboard) {
                     cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
                     cordova.plugins.Keyboard.disableScroll(true);
                 }
                 
                 if (window.StatusBar) {
-                    // org.apache.cordova.statusbar required
                     StatusBar.styleDefault();
                 }
             });
         })
 
-<<<<<<< HEAD
-        .service('Schedule', function ($http){
-            var apiUrl = 'http://vilis8uy.bget.ru/schedule.php';
-
-            this.getSchedule = function(){
-                $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded; charset=UTF-8";
-
-                var tdata = {
-                    "cmd": "all_schedule",
-                    "group": window.localStorage["group"]
-                };
-
-                return $http.post(apiUrl, tdata).success(function(info){
-                    return info;
-                });
-            }
+        .constant('Config', {
+            'SITE_URL': 'http://sevgurasp.ru',
+            'API_URL': 'http://sevgurasp.ru/api/schedule.php',
+            'VERSION': 0.31,
+            'DAY_OF_WEEK': [
+                {id: 1, title: "Понедельник"},
+                {id: 2, title: "Вторник"},
+                {id: 3, title: "Среда"},
+                {id: 4, title: "Четверг"},
+                {id: 5, title: "Пятница"},
+                {id: 6, title: "Суббота"}
+            ]
         })
 
-=======
->>>>>>> 3c286985457a82dded54e3f82d01e2cfa0c4cd1c
         .config(function ($stateProvider, $urlRouterProvider) {
             $stateProvider
                     .state('app', {
                         url: '/app',
                         abstract: true,
                         templateUrl: 'templates/menu.html',
-<<<<<<< HEAD
                         controller: 'AppCtrl',
                         resolve: {
-                            data: function($rootScope, $cordovaNetwork, $ionicPopup, Schedule){
+                            data: function($http, $rootScope, $cordovaNetwork, $ionicPopup, Schedule, Group){
                                 window.localStorage["offline"] = $cordovaNetwork.isOffline();
                                 // window.localStorage["offline"] = "false";
 
                                 if(!window.localStorage["group"]){
                                     $rootScope.data = {};
+
+                                    Group.getGroups().success(function(data){
+                                        window.localStorage["groups"] = JSON.stringify(data);
+                                        $rootScope.data.groups = JSON.parse(window.localStorage["groups"]);
+                                    });
 
                                     return $ionicPopup.show({
                                         templateUrl: 'templates/group-show/group_show.html',
@@ -103,24 +70,24 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                                             }
                                         }]
                                     }).then(function(){
-                                        return Schedule.getSchedule().success(function(data){
+                                        return Schedule.getAllSchedule().success(function(data){
                                             window.localStorage["schedule"] = JSON.stringify(data);
                                         });
                                     });
                                 }
+
+                                if(!window.localStorage["schedule"] || window.localStorage["offline"] == "false"){
+                                    return Schedule.getAllSchedule().success(function(data){
+                                        window.localStorage["schedule"] = JSON.stringify(data);
+                                    });
+                                }
                             }
                         }
-=======
-                        controller: 'AppCtrl'
->>>>>>> 3c286985457a82dded54e3f82d01e2cfa0c4cd1c
                     })
 
                     .state('app.main', {
                         url: '/main',
-<<<<<<< HEAD
                         cache: false,
-=======
->>>>>>> 3c286985457a82dded54e3f82d01e2cfa0c4cd1c
                         views: {
                             'menuContent': {
                                 templateUrl: 'templates/main.html',
@@ -134,21 +101,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                         views: {
                             'menuContent': {
                                 templateUrl: 'templates/schedule.html',
-<<<<<<< HEAD
                                 controller: 'ScheduleCtrl',
-=======
-                                controller: 'ScheduleCtrl'
->>>>>>> 3c286985457a82dded54e3f82d01e2cfa0c4cd1c
                             }
                         }
                     })
 
                     .state('app.day', {
                         url: '/day/:id',
-<<<<<<< HEAD
                         cache: false,
-=======
->>>>>>> 3c286985457a82dded54e3f82d01e2cfa0c4cd1c
                         views: {
                             'menuContent': {
                                 templateUrl: 'templates/day.html',
@@ -164,22 +124,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                                 templateUrl: 'templates/teachers.html',
                                 controller: 'TeacherCtrl'
                             }
-<<<<<<< HEAD
                         },
                         resolve: {
-                            teachers: function($http){
+                            teachers: function($http, Config){
                                 if(window.localStorage["offline"] == "false"){
-                                    var tdata = {
-                                        "cmd": "getteacher",
-                                    };
+                                    var request = "?cmd=getteacher";
 
-                                    return $http.post("http://vilis8uy.bget.ru/schedule.php", tdata).success(function (data) {
+                                    return $http.get(Config.API_URL + request).success(function (data) {
                                         return data;
                                     });
                                 }
                             }
-=======
->>>>>>> 3c286985457a82dded54e3f82d01e2cfa0c4cd1c
                         }
                     })
 
@@ -191,11 +146,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                                 controller: 'SettingsCtrl'
                             }
                         }
+                    })
+
+                    .state('app.about', {
+                        url: '/about',
+                        views: {
+                            'menuContent': {
+                                templateUrl: 'templates/about.html',
+                                controller: 'AboutCtrl'
+                            }
+                        }
                     });
             // if none of the above states are matched, use this as the fallback
             $urlRouterProvider.otherwise('/app/main');
-<<<<<<< HEAD
         })
-=======
-        });
->>>>>>> 3c286985457a82dded54e3f82d01e2cfa0c4cd1c

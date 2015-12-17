@@ -9,7 +9,6 @@
 			</label>
 		</li>
 
-<<<<<<< HEAD
 		<div style="text-align: center;">Просто показывает какой сейчас режим включен(переключать бессымысленно)</div>
 
 		<label class="item-input item-select">
@@ -17,8 +16,7 @@
 		      Группа
 		    </div>
 		    <select ng-model="settings.group">
-		      <option>ИСб-25</option>
-		      <option>ИСб-32</option>
+		      <option ng-repeat="g in settings.groups">{{g.group_name}}</option>
 		    </select>
 		</label>
 
@@ -33,19 +31,9 @@
 		</label>
 
 		<br />
-=======
-		<li class="item">
-			<label>Группа</label>
-		</li>
-
-		<br />
-		
-		<div style="text-align: center;">Просто показывает какой сейчас режим включен(переключать бессымысленно)</div>
->>>>>>> 3c286985457a82dded54e3f82d01e2cfa0c4cd1c
 
 		<div style="text-align: center;">
 			<button class="button button-positive" ng-click="savesettings()">Сохранить настройки</button><br /><br />
-			<button class="button button-assertive" ng-click="cleardata()">Очистить хранилище расписания</button>
 		</div>
 	</ion-content>
 </ion-view>

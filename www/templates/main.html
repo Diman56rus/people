@@ -5,19 +5,17 @@
             <h1 ng-if="weekNumber() % 2 != 0">Нечетная неделя</h1>
         </center>
 
-<<<<<<< HEAD
 
         <div class="card" ng-show="has_update == 1">
           <div class="item item-divider">
             Доступно обновление
           </div>
-          <div class="item item-text-wrap">
+          <div class="item item-text-wrap" style="text-align: center;">
             Доступна новая версия приложения. Скачать можно <a href="#" style="text-decoration: none; color: red;" ng-click="go()">тут</a>
+            <br />
           </div>
         </div>
 
-=======
->>>>>>> 3c286985457a82dded54e3f82d01e2cfa0c4cd1c
         <div ng-repeat="arr in msg">
             <div class="card">
                 <div class="item item-divider positive-bg">
@@ -36,7 +34,7 @@
 
                     <div ng-show="date < arr.end && date > arr.start">
                         <div style="width: 100%; height: 40px; border-radius: 6px; border: 1px solid lightsteelblue;">
-                            <div style="border-radius: 5px; height: 40px; background-color: lightsteelblue;" ng-style="{'width': diff(date, arr.end)}">&nbsp;</div>
+                            <div style="border-radius: 5px; height: 40px; background-color: lightsteelblue;" ng-style="{'width': diff(arr.start, arr.end)}">&nbsp;</div>
                         </div>
                     </div>
 

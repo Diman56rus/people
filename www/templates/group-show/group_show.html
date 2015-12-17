@@ -1,12 +1,10 @@
 <div class="list">
-
   <label class="item item-input item-select">
     <div class="input-label">
       Группа
     </div>
     <select ng-model="data.group">
-    	<option>ИСб-25</option>
-		<option>ИСб-32</option>
+    	<option ng-repeat="g in data.groups">{{g.group_name}}</option>
     </select>
   </label>
 
