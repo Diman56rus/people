@@ -5,7 +5,7 @@ angular.module("starter.controllers", [])
                     title: "Добро пожаловать!",
                     template: "Для нормального функционирования приложения нужно подключение к интернету, всего лишь 1 раз :-)"
                 });
-            }   
+            }
         })
 
         .controller("ScheduleCtrl", function ($scope, $state) {
@@ -90,20 +90,26 @@ angular.module("starter.controllers", [])
         })
 
         .controller("TeacherCtrl", function ($scope, $http) {
-            var tdata = {
-                "cmd": "getteacher",
-            };
-
             if(window.localStorage["offline"] == "false"){
-                $http.post("http://vilis8uy.bget.ru/schedule.php", tdata).success(function (data) {
+                var tdata = {
+                    "cmd": "getteacher",
+                };
+
+                var getteacher = function(){
+                    return $http.post("http://vilis8uy.bget.ru/schedule.php", tdata).success(function (data) {
+                        return data;
+                    });
+                };
+
+                getteacher().success(function(data){
                     window.localStorage["teachers"] = JSON.stringify(data);
                 });
             }
 
-            $scope.teachers = window.localStorage["teachers"];
+            $scope.teachers = JSON.parse(window.localStorage["teachers"]);
         })
 
-        .controller("SettingsCtrl", function ($scope, $cordovaNetwork, $ionicPopup){
+        .controller("SettingsCtrl", function ($scope, $ionicPopup){
             $scope.cleardata = function(){
                 window.localStorage["schedule"] = "undefined";
 
@@ -113,6 +119,5 @@ angular.module("starter.controllers", [])
                 });
             };
 
-            $scope.offline = $cordovaNetwork.isOffline();
-            window.localStorage["offline"] = $scope.offline;
+            $scope.offline = window.localStorage["offline"];
         });

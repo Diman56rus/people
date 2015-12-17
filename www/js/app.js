@@ -6,7 +6,9 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
 
-        .run(function ($rootScope, $ionicPlatform, $ionicPopup, $http) {
+        .run(function ($rootScope, $ionicPlatform, $http, $cordovaNetwork) {
+            window.localStorage["offline"] = $cordovaNetwork.isOffline();
+
             if(window.localStorage["offline"] == "false"){
                 $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded; charset=UTF-8";
 
@@ -35,7 +37,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                 if (window.cordova && window.cordova.plugins.Keyboard) {
                     cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
                     cordova.plugins.Keyboard.disableScroll(true);
-
                 }
                 
                 if (window.StatusBar) {
@@ -47,7 +48,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
 
         .config(function ($stateProvider, $urlRouterProvider) {
             $stateProvider
-
                     .state('app', {
                         url: '/app',
                         abstract: true,
