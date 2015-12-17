@@ -71,4 +71,6 @@ angular.module("starter.controllers", [])
             $scope.go = function(){
                 window.open(Config.SITE_URL, '_system', 'location=yes');
             }
+
+            $scope.version = Config.VERSION;
         });
