@@ -7,13 +7,12 @@
 
 
         <div class="card" ng-show="has_update == 1">
-          <div class="item item-divider">
-            Доступно обновление
-          </div>
-          <div class="item item-text-wrap" style="text-align: center;">
-            Доступна новая версия приложения. Скачать можно <a href="#" style="text-decoration: none; color: red;" ng-click="go()">тут</a>
-            <br />
-          </div>
+            <div class="item item-divider">
+                Доступно обновление
+            </div>
+            <div class="item item-text-wrap" style="text-align: center;">
+                Доступна новая версия приложения. Скачать можно <a href="#" style="text-decoration: none; color: red;" ng-click="go()">тут</a><br />
+            </div>
         </div>
 
         <div ng-repeat="arr in msg">
@@ -32,21 +31,11 @@
 
                     <br />
 
-<<<<<<< HEAD
                     <div ng-if="date < arr.end && date > arr.start">
                         <progress max="100" value="{{diff(arr.start, arr.end)}}"></progress>
                     </div>
 
                     <div ng-if="date > arr.end">
-=======
-                    <div ng-show="date < arr.end && date > arr.start">
-                        <div style="width: 100%; height: 40px; border-radius: 6px; border: 1px solid lightsteelblue;">
-                            <div style="border-radius: 5px; height: 40px; background-color: lightsteelblue;" ng-style="{'width': diff(arr.start, arr.end)}">&nbsp;</div>
-                        </div>
-                    </div>
-
-                    <div ng-show="date > arr.end">
->>>>>>> e999278d081bda2dc829a33cfd36a129c134fc3f
                         <center><h2>Пара закончилась :)</h2></center>
                     </div>
                 </div>
