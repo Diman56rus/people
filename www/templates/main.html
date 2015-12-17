@@ -1,10 +1,38 @@
-<ion-view view-title="Главная">
+<ion-view view-title="Расписание на сегодня">
     <ion-content>
-        <div style="text-align: center">
-            <h1>Добро пожаловать</h1>
 
-            <h3>В этом приложении вы сможете получить актуальное расписание,
-                а так-же все преподавателей</h3>
+        <center><h1 ng-if="weekNumber() % 2 == 0">Четная неделя</h1>
+            <h1 ng-if="weekNumber() % 2 != 0">Нечетная неделя</h1>
+        </center>
+
+        <div ng-repeat="arr in msg">
+            <div class="card">
+                <div class="item item-divider positive-bg">
+                    {{arr.num}} пара - {{arr.subject.name}}
+                </div>
+                <div class="item item-text-wrap">
+                    <b>Кабинет: </b> {{arr.office}}<br />
+                    <b>Преподаватель: </b> {{arr.teacher}}<br />
+                    <b>Подгруппа: </b> 
+                    <span ng-if="arr.stud_subgroup == 3">Всем</span>
+                    <span ng-if="arr.stud_subgroup < 3">{{arr.stud_subgroup}}</span>
+                    <br />
+                    <b>Время проведения: </b> {{arr.start}} - {{arr.end}}<br />
+
+                    <br />
+
+                    <div ng-show="date < arr.end && date > arr.start">
+                        <div style="width: 100%; height: 40px; border-radius: 6px; border: 1px solid lightsteelblue;">
+                            <div style="border-radius: 5px; height: 40px; background-color: lightsteelblue;" ng-style="{'width': diff(date, arr.end)}">&nbsp;</div>
+                        </div>
+                    </div>
+
+                    <div ng-show="date > arr.end">
+                        <center><h2>Пара закончилась :)</h2></center>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </ion-content>
 </ion-view>

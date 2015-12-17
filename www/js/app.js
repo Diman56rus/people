@@ -4,9 +4,31 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers'])
+angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
 
-        .run(function ($ionicPlatform) {
+        .run(function ($rootScope, $ionicPlatform, $ionicPopup, $http) {
+            if(window.localStorage["offline"] == "false"){
+                $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded; charset=UTF-8";
+
+                var tdata = {
+                    "cmd": "all_schedule",
+                    "group": "ИСб-25"
+                };
+
+
+                var getData = function(){
+                    return $http.post("http://vilis8uy.bget.ru/schedule.php", tdata).success(function(data){
+                        return data;
+                    });
+                };
+
+
+                getData().success(function(data){
+                    window.localStorage["schedule"] = JSON.stringify(data);
+                });
+            }
+
+
             $ionicPlatform.ready(function () {
                 // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
                 // for form inputs)
@@ -15,6 +37,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                     cordova.plugins.Keyboard.disableScroll(true);
 
                 }
+                
                 if (window.StatusBar) {
                     // org.apache.cordova.statusbar required
                     StatusBar.styleDefault();
@@ -32,29 +55,12 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                         controller: 'AppCtrl'
                     })
 
-                    .state('app.search', {
-                        url: '/search',
-                        views: {
-                            'menuContent': {
-                                templateUrl: 'templates/search.html'
-                            }
-                        }
-                    })
-
-                    .state('app.browse', {
-                        url: '/browse',
-                        views: {
-                            'menuContent': {
-                                templateUrl: 'templates/browse.html'
-                            }
-                        }
-                    })
-
                     .state('app.main', {
                         url: '/main',
                         views: {
                             'menuContent': {
-                                templateUrl: 'templates/main.html'
+                                templateUrl: 'templates/main.html',
+                                controller: 'ScheduleCtrl'
                             }
                         }
                     })
@@ -68,6 +74,16 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                             }
                         }
                     })
+
+                    .state('app.day', {
+                        url: '/day/:id',
+                        views: {
+                            'menuContent': {
+                                templateUrl: 'templates/day.html',
+                                controller: 'ScheduleCtrl'
+                            }
+                        }
+                    })
                     
                     .state('app.teachers', {
                         url: '/teachers',
@@ -77,7 +93,17 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                                 controller: 'TeacherCtrl'
                             }
                         }
+                    })
+
+                    .state('app.settings', {
+                        url: '/settings',
+                        views: {
+                            'menuContent': {
+                                templateUrl: 'templates/settings.html',
+                                controller: 'SettingsCtrl'
+                            }
+                        }
                     });
             // if none of the above states are matched, use this as the fallback
-            $urlRouterProvider.otherwise('/main');
+            $urlRouterProvider.otherwise('/app/main');
         });
