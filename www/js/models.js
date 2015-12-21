@@ -25,13 +25,10 @@ angular.module("starter.models", [])
             });
         }
 
-        // week_by_define если мы явно хотим получить расписание нужной недели
-        this.getCurrent = function(num, arr, week_by_define){
+        this.getCurrent = function(num, arr){
             var data = JSON.parse(arr);
             var week = window.localStorage["week"];
             var res = [];
-
-            // console.log(week_by_define + ":"+ window.localStorage["week"]);
 
             for(var i = 0; i < data.length; i++){
                 if(data[i].day == num && data[i].week == week && (data[i].stud_subgroup == window.localStorage["subgroup"] || data[i].stud_subgroup == 3)){
@@ -60,12 +57,15 @@ angular.module("starter.models", [])
 
             weekNumber = Math.floor((this.time(ts - yearStart) + 1) / 7);
 
+            if(!window.localStorage["week"])
+            	window.localStorage["week"] = (weekNumber % 2 == 0) ? "even" : "odd";
+
             return weekNumber;
         };
 
-        this.getSchedule = function(num, week_by_define) {
+        this.getSchedule = function(num) {
             var tmp = window.localStorage["schedule"];
-            return this.getCurrent(num, tmp, week_by_define);
+            return this.getCurrent(num, tmp);
         };
 
         this.getSecond = function(date_receive){

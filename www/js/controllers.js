@@ -44,7 +44,7 @@ angular.module("starter.controllers", [])
 
             $scope.cur_date = new Date();
             $scope.dayOfWeek = Config.DAY_OF_WEEK;
-            $scope.msg = Schedule.getSchedule($scope.getDayNum(), window.localStorage["week"]);
+            $scope.msg = Schedule.getSchedule($scope.getDayNum());
             $scope.week = function(from){
                 if(window.localStorage["week"] && from)
                     return (window.localStorage["week"] == "even") ? "Четная неделя" : "Нечетная неделя";
