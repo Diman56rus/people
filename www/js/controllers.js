@@ -27,9 +27,30 @@ angular.module("starter.controllers", [])
                 return num;
             };
 
+            $scope.changeWeek = function(week){
+                if(week == "Нечетная неделя"){
+                    $scope.week = function(){
+                        window.localStorage["week"] = "even";
+                        return "Четная неделя";
+                    }
+                }
+                else{
+                    $scope.week = function(){
+                        window.localStorage["week"] = "odd";
+                        return "Нечетная неделя";
+                    }
+                }
+            }
+
             $scope.cur_date = new Date();
             $scope.dayOfWeek = Config.DAY_OF_WEEK;
-            $scope.msg = Schedule.getSchedule($scope.getDayNum());
+            $scope.msg = Schedule.getSchedule($scope.getDayNum(), window.localStorage["week"]);
+            $scope.week = function(from){
+                if(window.localStorage["week"] && from)
+                    return (window.localStorage["week"] == "even") ? "Четная неделя" : "Нечетная неделя";
+                else
+                    return (Schedule.weekNumber() == 0) ? "Четная неделя" : "Нечетная неделя";
+            }
 
             var hour = $scope.cur_date.getHours();
             var minute = $scope.cur_date.getMinutes();

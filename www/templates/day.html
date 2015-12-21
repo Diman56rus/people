@@ -1,9 +1,5 @@
 <ion-view view-title="Расписание на {{dayOfWeek[getDayNum() - 1].title}}">
     <ion-content>
-        <center><h1 ng-if="weekNumber() % 2 == 0">Четная неделя</h1>
-            <h1 ng-if="weekNumber() % 2 != 0">Нечетная неделя</h1>
-        </center>
-
         <div ng-repeat="arr in msg">
             <div class="card">
                 <div class="item item-divider positive-bg">
