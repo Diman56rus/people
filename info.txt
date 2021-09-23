@@ -52,4 +52,5 @@ Config.xml file:
 No Plugins Currently Installed
 
 Error retrieving Android platform information: Error: android: Command failed with exit code ENOENT
+Использовать на IOS запрещено
 
